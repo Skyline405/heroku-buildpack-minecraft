@@ -6,7 +6,7 @@ mc_exec=minecraft.jar
 mc_forge=minecraft-forge.jar
 
 if test -f "$mc_forge"; then
-  echo "$FILE exist"
+  mc_exec=$mc_forge
 fi
 
 if [ -z "$NGROK_API_TOKEN" ]; then
