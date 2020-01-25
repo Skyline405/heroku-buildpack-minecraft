@@ -2,6 +2,12 @@
 
 mc_port=25566
 port=${1:-${PORT:-8080}}
+mc_exec=minecraft.jar
+mc_forge=minecraft-forge.jar
+
+if test -f "$mc_forge"; then
+  echo "$FILE exist"
+fi
 
 if [ -z "$NGROK_API_TOKEN" ]; then
   echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
@@ -42,7 +48,7 @@ case $limit in
 esac
 
 echo "Starting: minecraft ${mc_port}"
-eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar minecraft.jar nogui"
+eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar ${mc_exec} -o true nogui"
 main_pid=$!
 
 # Flush the logfile every second, and ensure that the logfile exists
